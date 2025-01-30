@@ -1,0 +1,34 @@
+name: Deploy Sigma5-bot
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Adım: Kodunuzu GitHub'dan çek
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Adım: Gerekli kurulumları yap (örneğin Node.js veya Docker)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 3. Adım: Bağımlılıkları yükle ve build al
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Adım: Özel deployment komutlarını buraya yaz
+      - name: Deploy to Server
+        run: |
+          echo "🛠️ Deployment başladı..."
+          npm run build
+          # Docker kullanıyorsanız:
+          # docker build -t sigma5-bot .
+          # docker run -d -p 3000:3000 sigma5-bot
+          echo "✅ Deployment tamamlandı!"
